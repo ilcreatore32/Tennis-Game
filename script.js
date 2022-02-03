@@ -15,9 +15,10 @@ let ballSpeedY = 10;
 let player1Y = 250;
 const paddleHeight = 120;
 
+let paddle2Y = 250;
+
 // Game Loop
 window.onload = function () {
-  console.log("Hello World!");
   gameBoard = document.getElementById("gameBoard");
   gameBoardContext = gameBoard.getContext("2d");
   setInterval(function () {
@@ -39,8 +40,7 @@ function drawEverything() {
 
 function moveEverything() {
   moveBall();
-  movePlayer1();
-  movePlayer2();
+  moveComputer();
 }
 
 /* Drawing */
@@ -71,7 +71,7 @@ function drawPlayer1() {
 // Draw the player two
 function drawPlayer2() {
   gameBoardContext.beginPath();
-  gameBoardContext.rect(760, 250, 10, 120);
+  gameBoardContext.rect(gameBoard.width - 10, paddle2Y, 10, 120);
   gameBoardContext.fillStyle = "white";
   gameBoardContext.fill();
   gameBoardContext.closePath();
@@ -83,7 +83,11 @@ function moveBall() {
   ballX += ballSpeedX;
   ballY += ballSpeedY;
   if (ballX > gameBoard.width - 10) {
-    ballSpeedX = -ballSpeedX;
+    if (ballY > paddle2Y && ballY < paddle2Y + paddleHeight) {
+      ballSpeedX = -ballSpeedX;
+    } else {
+      ballReset();
+    }
   }
   if (ballX < 0) {
     if (ballY > player1Y && ballY < player1Y + paddleHeight) {
@@ -114,4 +118,12 @@ function mousePosition(e) {
     x: mouseX,
     y: mouseY,
   };
+}
+
+function moveComputer() {
+  if (paddle2Y + paddleHeight / 2 < ballY) {
+    paddle2Y += 8;
+  } else {
+    paddle2Y -= 8;
+  }
 }
