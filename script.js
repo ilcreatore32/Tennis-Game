@@ -13,6 +13,7 @@ let ballSpeedY = 10;
 
 // Player 1
 let player1Y = 250;
+const paddleHeight = 120;
 
 // Game Loop
 window.onload = function () {
@@ -25,7 +26,7 @@ window.onload = function () {
   }, 1000 / framesPerSecond);
   gameBoard.addEventListener("mousemove", function (e) {
     let mouse = mousePosition(e);
-    player1Y = mouse.y - 75;
+    player1Y = mouse.y - paddleHeight / 2;
   });
 };
 
@@ -61,7 +62,7 @@ function drawBall() {
 // Draw the player one
 function drawPlayer1() {
   gameBoardContext.beginPath();
-  gameBoardContext.rect(20, player1Y, 10, 120);
+  gameBoardContext.rect(0, player1Y, 10, paddleHeight);
   gameBoardContext.fillStyle = "white";
   gameBoardContext.fill();
   gameBoardContext.closePath();
@@ -85,7 +86,11 @@ function moveBall() {
     ballSpeedX = -ballSpeedX;
   }
   if (ballX < 0) {
+    if (ballY > player1Y && ballY < player1Y + paddleHeight) {
+      ballSpeedX = -ballSpeedX;
+    } else {
       ballReset();
+    }
   }
   if (ballY > gameBoard.height - 10 || ballY < 10) {
     ballSpeedY = -ballSpeedY;
@@ -93,6 +98,8 @@ function moveBall() {
 }
 
 function ballReset() {
+  ballSpeedX = -ballSpeedX;
+  ballSpeedY = -ballSpeedY;
   ballX = gameBoard.width / 2;
   ballY = gameBoard.height / 2;
 }
