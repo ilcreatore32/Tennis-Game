@@ -14,8 +14,10 @@ let ballSpeedY = 10;
 // Player 1
 let player1Y = 250;
 const paddleHeight = 120;
+var player1Score = 0;
 
 let paddle2Y = 250;
+var player2Score = 0;
 
 // Game Loop
 window.onload = function () {
@@ -36,6 +38,16 @@ function drawEverything() {
   drawBall();
   drawPlayer1();
   drawPlayer2();
+  gameBoardContext.fillText(
+    "Player: " + player1Score,
+    gameBoard.width / 2 - 200,
+    50
+  );
+  gameBoardContext.fillText(
+    "Computer: " + player2Score,
+    gameBoard.width / 2 + 200,
+    50
+  );
 }
 
 function moveEverything() {
@@ -86,6 +98,7 @@ function moveBall() {
     if (ballY > paddle2Y && ballY < paddle2Y + paddleHeight) {
       ballSpeedX = -ballSpeedX;
     } else {
+      player1Score++;
       ballReset();
     }
   }
@@ -93,6 +106,7 @@ function moveBall() {
     if (ballY > player1Y && ballY < player1Y + paddleHeight) {
       ballSpeedX = -ballSpeedX;
     } else {
+      player2Score++;
       ballReset();
     }
   }
