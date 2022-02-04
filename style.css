@@ -1,0 +1,24 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#gameBoard {
+  border-radius: 10px;
+}
+
+.gameContainer {
+  width: 100%;
+  margin: 1rem 0;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gameCase {
+  padding: 1rem;
+  background-color: #54565d;
+  border-radius: 10px;
+}

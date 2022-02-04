@@ -45,8 +45,19 @@ window.onload = function () {
   });
 };
 
+function drawNet() {
+  for (let i = 0; i < gameBoard.height; i += 40) {
+    gameBoardContext.beginPath();
+    gameBoardContext.moveTo(gameBoard.width / 2, i);
+    gameBoardContext.lineTo(gameBoard.width / 2, i + 20);
+    gameBoardContext.strokeStyle = "#314a2d";
+    gameBoardContext.stroke();
+  }
+}
+
 function drawEverything() {
   drawGame();
+  drawNet();
   drawBall();
   drawPlayer1();
   drawPlayer2();
@@ -74,10 +85,10 @@ function moveEverything() {
 /* Drawing */
 // Draw the game
 function drawGame() {
-  gameBoardContext.fillStyle = "black";
+  gameBoardContext.fillStyle = "#a2ca34";
   gameBoardContext.fillRect(0, 0, gameBoard.width, gameBoard.height);
   if (winScreen) {
-    gameBoardContext.fillStyle = "white";
+    gameBoardContext.fillStyle = "#314a2d";
     if (player1Score >= winningScore) {
       gameBoardContext.fillText(
         "Player wins!  Click to play again.",
@@ -98,7 +109,7 @@ function drawGame() {
 function drawBall() {
   gameBoardContext.beginPath();
   gameBoardContext.arc(ballX, ballY, 10, 0, Math.PI * 2, true);
-  gameBoardContext.fillStyle = "white";
+  gameBoardContext.fillStyle = "#314a2d";
   gameBoardContext.fill();
   gameBoardContext.closePath();
 }
@@ -107,7 +118,7 @@ function drawBall() {
 function drawPlayer1() {
   gameBoardContext.beginPath();
   gameBoardContext.rect(0, player1Y, 10, paddleHeight);
-  gameBoardContext.fillStyle = "white";
+  gameBoardContext.fillStyle = "#314a2d";
   gameBoardContext.fill();
   gameBoardContext.closePath();
 }
@@ -116,7 +127,7 @@ function drawPlayer1() {
 function drawPlayer2() {
   gameBoardContext.beginPath();
   gameBoardContext.rect(gameBoard.width - 10, paddle2Y, 10, 120);
-  gameBoardContext.fillStyle = "white";
+  gameBoardContext.fillStyle = "#314a2d";
   gameBoardContext.fill();
   gameBoardContext.closePath();
 }
